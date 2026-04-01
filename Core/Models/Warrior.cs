@@ -22,6 +22,7 @@ namespace HeroEngine.Core.Models
 
         public override void TakeDamage(int rawDamageTaken)
         {
+            rawDamageTaken -= base.defenseBuffCount * 2;
             int trueDamageTaken = rawDamageTaken - Armor;
             CurrentHealth -= trueDamageTaken;
 
