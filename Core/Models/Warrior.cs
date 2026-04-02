@@ -30,7 +30,7 @@ namespace HeroEngine.Core.Models
             {
                 CurrentHealth = 0;
             }
-            Console.WriteLine($"{Name} recieves {rawDamageTaken} -> absorbed {Armor} by armor -> net damage: {trueDamageTaken} | HP: {CurrentHealth}/{MaxHealth}");
+            Console.WriteLine($"{Name} recieves {rawDamageTaken} -> absorbed {Armor} by armor -> net damage: {trueDamageTaken} | HP: {CurrentHealth}/{MaxHP}");
 
             if (!IsAlive)
             {

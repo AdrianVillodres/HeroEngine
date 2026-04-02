@@ -8,13 +8,11 @@ using HeroEngine.Core.Enums;
 
 namespace HeroEngine.Core.Models
 {
-    public abstract class AHero
+    public abstract class AHero : ACharacter
     {
         public const int baseHealth = 100;
         public string Name { get; set; }
         public int Level { get; }
-        public int MaxHealth { get; set; }
-
         public int CurrentHealth { get; set; }
 
         public List<Ability> abilities = new List<Ability>();
@@ -24,12 +22,12 @@ namespace HeroEngine.Core.Models
         public int attackBuffCount { get; private set; }
         
 
-        public AHero(string name, int level)
+        public AHero(string name, int level) : base(name)
         {
             Name = name;
             Level = level;
-            MaxHealth = (int)(baseHealth * (1 + 0.25 * (level - 1)));
-            CurrentHealth = MaxHealth;
+            MaxHP = (int)(baseHealth * (1 + 0.25 * (level - 1)));
+            CurrentHealth = MaxHP;
             defenseBuffCount = 0;
             attackBuffCount = 0;
         }
@@ -38,7 +36,7 @@ namespace HeroEngine.Core.Models
         /// This method is used to see the stats of the hero
         /// </summary>
         /// <returns>The full string of the stats of the hero</returns>
-        public virtual string Presentation() => $"[Hero] {Name} | Level: {Level} | HP: {CurrentHealth}/{MaxHealth}";
+        public virtual string Presentation() => $"[Hero] {Name} | Level: {Level} | HP: {CurrentHealth}/{MaxHP}";
 
         /// <summary>
         /// This method is used to attack another hero
@@ -70,7 +68,7 @@ namespace HeroEngine.Core.Models
             {
                 CurrentHealth = 0;
             }
-            Console.WriteLine($"{Name} recieves {rawDamageTaken} | HP: {CurrentHealth}/{MaxHealth}");
+            Console.WriteLine($"{Name} recieves {rawDamageTaken} | HP: {CurrentHealth}/{MaxHP}");
 
             if (!IsAlive)
             {

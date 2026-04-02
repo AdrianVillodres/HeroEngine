@@ -56,6 +56,14 @@ namespace HeroEngine.Core.UI
             Console.WriteLine(dalia.Presentation());
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine();
+            Console.WriteLine("------------------Combat System---------------------");
+            Console.WriteLine();
+            Minion loki = new Minion("Loki");
+            Elite shadow = new Elite("Shadow");
+            Boss altair = new Boss("Altair");
+            Console.WriteLine(loki);
+            Console.WriteLine(shadow);
+            Console.WriteLine(altair);
         }
     }
 }
