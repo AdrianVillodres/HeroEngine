@@ -20,10 +20,10 @@ namespace HeroEngine.Core.Models
 
         public override string Presentation() => base.Presentation() + $" | Mana: {Mana} | Arcane: {Arcane}"; //This way I don't reuse code
 
-        public override int AttackHero(int damage)
+        public override int Attack(int damage)
         {
             Mana -= 20;
-            return base.AttackHero(damage);
+            return base.Attack(damage);
         }
     }
 }

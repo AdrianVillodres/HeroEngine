@@ -18,10 +18,10 @@ namespace HeroEngine.Core.Models
 
         public override string Presentation() => base.Presentation() + $" | Furtive Damage Multiplier: {FurtiveDamageMultiplier} | Hidden Daggers: {HiddenDaggers}";
 
-        public override int AttackHero(int damage)
+        public override int Attack(int damage)
         {
             damage *= FurtiveDamageMultiplier;
-            return base.AttackHero(damage);
+            return base.Attack(damage);
         }
     }
 }

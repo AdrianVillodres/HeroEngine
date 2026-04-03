@@ -1,4 +1,5 @@
-﻿using HeroEngine.Core.Models;
+﻿using System.Security.Cryptography.X509Certificates;
+using HeroEngine.Core.Models;
 
 namespace HeroEngine.Core.UI
 {
@@ -17,7 +18,7 @@ namespace HeroEngine.Core.UI
             Console.WriteLine(dalia.Presentation());
             Console.WriteLine("------------");
             Console.WriteLine(mercer.Presentation());
-            abalon.TakeDamage(dalia.AttackHero(13));
+            abalon.TakeDamage(dalia.Attack(13));
             Console.WriteLine(abalon.Presentation());
             Console.WriteLine();
             Console.WriteLine("------------------Armoury---------------------");
@@ -52,7 +53,7 @@ namespace HeroEngine.Core.UI
             dalia.CastAbility(buff, abalon);
             dalia.CastAbility(buff, abalon);
             dalia.CastAbility(buff, abalon);
-            dalia.TakeDamage(abalon.AttackHero(13));
+            dalia.TakeDamage(abalon.Attack(13));
             Console.WriteLine(dalia.Presentation());
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine();
@@ -64,6 +65,13 @@ namespace HeroEngine.Core.UI
             Console.WriteLine(loki);
             Console.WriteLine(shadow);
             Console.WriteLine(altair);
+            List<ACharacter> combatants = new List<ACharacter>();
+            combatants.Add(abalon);
+            combatants.Add(dalia);
+            combatants.Add(mercer);
+            combatants.Add(loki);
+            combatants.Add(shadow);
+            combatants.Add(altair);
         }
     }
 }

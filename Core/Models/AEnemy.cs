@@ -9,12 +9,12 @@ namespace HeroEngine.Core.Models
 {
     public abstract class AEnemy : ACharacter
     {
-        public  string Name { get; set; }
         public EnemyType Type { get; set; }
 
         public AEnemy(string name) : base(name)
         {
-            Name = name;
+            CurrentHealth = MaxHP;
+            Speed = 10 * ((int)Type / 10); 
         }
 
         /// <summary>
@@ -27,10 +27,10 @@ namespace HeroEngine.Core.Models
         /// This method attacks a hero and reduces his current hp
         /// </summary>
         /// <param name="hero">the hero you want to attack</param>
-        public void AttackHero(AHero hero)
+        public void AttackTarget(ACharacter target)
         {
-            hero.CurrentHealth = (int)Type / 2;
-            Console.WriteLine(hero.CurrentHealth);
+            target.CurrentHealth = (int)Type / 2;
+            Console.WriteLine(target.CurrentHealth);
         }
     }
 }
