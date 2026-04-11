@@ -16,8 +16,17 @@ namespace HeroEngine.Core.Models
             HiddenDaggers = hiddenDaggers;
         }
 
+        /// <summary>
+        /// An override to the presentation method of the AHero class
+        /// </summary>
+        /// <returns>The base presentation string with the rogue properties added</returns>
         public override string Presentation() => base.Presentation() + $" | Furtive Damage Multiplier: {FurtiveDamageMultiplier} | Hidden Daggers: {HiddenDaggers}";
 
+        /// <summary>
+        /// An override of the attack method for the mage, who has a damage multiplier
+        /// </summary>
+        /// <param name="damage">The raw damage points of the attack</param>
+        /// <returns>The real damage of the attack</returns>
         public override int Attack(int damage)
         {
             damage *= FurtiveDamageMultiplier;

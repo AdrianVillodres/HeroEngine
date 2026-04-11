@@ -14,7 +14,8 @@ namespace HeroEngine.Core.Models
         public AEnemy(string name) : base(name)
         {
             CurrentHealth = MaxHP;
-            Speed = 10 * ((int)Type / 10); 
+            Speed = 10 * ((int)Type / 10);
+            CharType = "ENEMY";
         }
 
         /// <summary>

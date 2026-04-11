@@ -7,6 +7,7 @@ namespace HeroEngine.Core.UI
     {
         public static void Main()
         {
+            //First Chapter
             Console.WriteLine("------------------Heroes---------------------");
             Console.WriteLine();
             Warrior abalon = new Warrior("Abalon", 3, "Who dares challenge me?!");
@@ -21,18 +22,24 @@ namespace HeroEngine.Core.UI
             abalon.TakeDamage(dalia.Attack(13));
             Console.WriteLine(abalon.Presentation());
             Console.WriteLine();
+
+            //Second Chapter
             Console.WriteLine("------------------Armoury---------------------");
             Console.WriteLine();
             Ability swartz = new Ability("Swartz of the Ice Queen", Enums.Rarity.Legendary, Enums.AbilityType.Attack);
-            Ability hellfire = new Ability("Hellfire of demise", Enums.Rarity.Legendary, Enums.AbilityType.Attack);
+            Ability hellfire = new Ability("Hellfire of demise", Enums.Rarity.Epic, Enums.AbilityType.Attack);
+            Ability airCutter = new Ability("Air cutter", Enums.Rarity.Common, Enums.AbilityType.Attack);
+            Ability corrupt = new Ability("Corrupt memory", Enums.Rarity.Rare, Enums.AbilityType.Attack);
             Ability heal = new Ability("Healing hands", Enums.Rarity.Rare, Enums.AbilityType.Healing);
             Ability defense = new Ability("defense", Enums.Rarity.Rare, Enums.AbilityType.Defense);
             Ability buff = new Ability("buff", Enums.Rarity.Rare, Enums.AbilityType.Support);
             Console.WriteLine(swartz);
 
+            //I make this much add to the abilities to be able to test all the posibilities
             dalia.AddAbility(swartz);
             dalia.AddAbility(heal);
-            dalia.AddAbility(hellfire);
+            abalon.AddAbility(hellfire);
+            mercer.AddAbility(airCutter);
             dalia.AddAbility(defense);
             dalia.AddAbility(buff);
             Console.WriteLine("----------------------------------------------------------------------");
@@ -57,6 +64,8 @@ namespace HeroEngine.Core.UI
             Console.WriteLine(dalia.Presentation());
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine();
+
+            //Third Chapter
             Console.WriteLine("------------------Combat System---------------------");
             Console.WriteLine();
             Minion loki = new Minion("Loki");
@@ -65,13 +74,18 @@ namespace HeroEngine.Core.UI
             Console.WriteLine(loki);
             Console.WriteLine(shadow);
             Console.WriteLine(altair);
-            List<ACharacter> combatants = new List<ACharacter>();
-            combatants.Add(abalon);
-            combatants.Add(dalia);
-            combatants.Add(mercer);
-            combatants.Add(loki);
-            combatants.Add(shadow);
-            combatants.Add(altair);
+            loki.AddAbility(corrupt);
+            shadow.AddAbility(corrupt);
+            altair.AddAbility(corrupt);
+            List<ACharacter> fighters = new List<ACharacter>();
+            fighters.Add(abalon);
+            fighters.Add(dalia);
+            fighters.Add(mercer);
+            fighters.Add(loki);
+            fighters.Add(shadow);
+            fighters.Add(altair);
+            CombatSystem ui = new CombatSystem();
+            ui.Combat(fighters);
         }
     }
 }

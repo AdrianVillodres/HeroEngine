@@ -11,12 +11,7 @@ namespace HeroEngine.Core.Models
     public abstract class AHero : ACharacter
     {
         public int Level { get; }
-
-        public List<Ability> abilities = new List<Ability>();
-
-
         
-
         public AHero(string name, int level) : base(name)
         {
             Name = name;
@@ -24,6 +19,7 @@ namespace HeroEngine.Core.Models
             MaxHP = (int)(baseHealth * (1 + 0.25 * (level - 1)));
             CurrentHealth = MaxHP;
             Speed = 100 * Level;
+            CharType = "HERO";
         }
 
         /// <summary>
@@ -32,77 +28,43 @@ namespace HeroEngine.Core.Models
         /// <returns>The full string of the stats of the hero</returns>
         public virtual string Presentation() => $"[Hero] {Name} | Level: {Level} | HP: {CurrentHealth}/{MaxHP}";
 
-
         /// <summary>
-        /// This method adds an ability to the hero in case the ability is not already added and sorts the abilities ordering them for the rarity
+        /// override of the attack method, used to attack a character
         /// </summary>
-        /// <param name="ability">The ability full object</param>
-        public void AddAbility(Ability ability)
+        /// <param name="damage">The raw damage points of the attack</param>
+        /// <returns>The real damage of the attack</returns>
+        public override int Attack(int damage)
         {
-            Predicate<Ability> same = a => a.Name == ability.Name;
-            if (abilities.Exists(same))
+            if (!IsAlive)
+                return 0;
+
+            if (abilities.Count > 0)
             {
-                Console.WriteLine($"The ability {ability.Name} already exists");
+                Ability ability = abilities[0];
+                Console.WriteLine($"{Name} uses {ability.Name}");
+                return ability.Power + (attackBuffCount * 2);
             }
-            else
-            {
-                abilities.Add(ability);
-                abilities.Sort((a, b) => a.Rarity.CompareTo(b.Rarity));
-                Console.WriteLine($"The ability {ability.Name} has benn added succesfully");
-            }
+
+            return base.Attack(damage);
         }
 
         /// <summary>
-        /// This method lists all the abilities that the hero has
+        /// override of the AttackEngine method, used to attack a character, used in the combat engine
         /// </summary>
-        public void ListAllAbilities()
+        /// <param name="damage">The raw damage points of the attack</param>
+        /// <returns>The real damage of the attack</returns>
+        public override int AttackEngine(int damage)
         {
-            Console.WriteLine("=============================================================================");
-            Console.WriteLine($"{Name} ABILITY LOADOUT");
-            foreach (Ability ability in abilities)
-            {
-                Console.WriteLine($"[{ability.Rarity}]   {ability.Name}  |   Type: {ability.Type}    |   Cost: {ability.Cost} mana");
-            }
-            Console.WriteLine("=============================================================================");
-        }
+            if (!IsAlive)
+                return 0;
 
-        /// <summary>
-        /// This method casts the ability of the hero in case the hero has it and makes different effects depending on the ability type
-        /// </summary>
-        /// <param name="ability">the ability full object</param>
-        /// <param name="hero">the hero full object</param>
-        public void CastAbility(Ability ability, ACharacter target)
-        {
-            if (abilities.Contains(ability))
+            if (abilities.Count > 0)
             {
-                switch (ability.Type)
-                {
-                    case AbilityType.Attack:
-                        Console.WriteLine($"Casting '{ability.Name}' [{ability.Rarity}]...");
-                        Console.WriteLine($"{Name} inficts {ability.Power} of damage to {target.Name}");
-                        target.TakeDamage(ability.Power);
-                        break;
-                    case AbilityType.Healing:
-                        Console.WriteLine($"Casting '{ability.Name}' [{ability.Rarity}]...");
-                        Console.WriteLine($"{Name} heals {ability.Power} of HP to {target.Name}");
-                        target.CurrentHealth += ability.Power;
-                        break;
-                    case AbilityType.Defense:
-                        Console.WriteLine($"Casting '{ability.Name}' [{ability.Rarity}]...");
-                        Console.WriteLine($"{Name} upgrade defense of {target.Name}");
-                        target.defenseBuffCount++;
-                        break;
-                    case AbilityType.Support:
-                        Console.WriteLine($"Casting '{ability.Name}' [{ability.Rarity}]...");
-                        Console.WriteLine($"{Name} upgrade attack of {target.Name}");
-                        target.attackBuffCount++;
-                        break;
-                }
+                Ability ability = abilities[0];
+                return ability.Power + (attackBuffCount * 2);
             }
-            else
-            {
-                Console.WriteLine($"{Name} does not have this ability");
-            }
+
+            return base.Attack(damage);
         }
 
     }
