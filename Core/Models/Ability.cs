@@ -29,7 +29,7 @@ namespace HeroEngine.Core.Models
         /// <summary>
         /// This is an override of the ToString method to show the ability parameters
         /// </summary>
-        /// <returns></returns>
+        /// <returns>the full string of the ability</returns>
         public override string ToString() => $"[{Rarity}]   {Name}  |   Type: {Type}    |   Cost: {Cost} mana";
     }
 }
