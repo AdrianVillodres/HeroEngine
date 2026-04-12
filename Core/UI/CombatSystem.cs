@@ -10,6 +10,7 @@ namespace HeroEngine.Core.UI
     public class CombatSystem
     {
         const string BattleLogMSG = "  BATTLE LOG - Round ";
+        const string NoFightersMSG = "There are no fighters";
         const int baseDamage = 10;
 
         int round = 1;
@@ -22,108 +23,117 @@ namespace HeroEngine.Core.UI
 
         public void Combat(List<ACharacter> fighters)
         {
-            Directory.CreateDirectory("Files");
-
-            while (fighters.Any(f => f.IsAlive && f.CharType == "HERO") &&
-                   fighters.Any(f => f.IsAlive && f.CharType == "ENEMY"))
+            if (fighters.Count > 0)
             {
-                Console.WriteLine("==================================================");
-                Console.WriteLine($"{BattleLogMSG} {round}");
-                Console.WriteLine("==================================================");
 
-                TxtManager.Append(path, "==================================================");
-                TxtManager.Append(path, $"  BATTLE LOG - Round {round}");
-                TxtManager.Append(path, "==================================================");
 
-                fighters.Sort((a, b) => b.Speed.CompareTo(a.Speed));
+                Directory.CreateDirectory("Files");
 
-                foreach (var fighter in fighters)
+                while (fighters.Any(f => f.IsAlive && f.CharType == "HERO") &&
+                       fighters.Any(f => f.IsAlive && f.CharType == "ENEMY"))
                 {
-                    if (!fighter.IsAlive)
-                        continue;
+                    Console.WriteLine("==================================================");
+                    Console.WriteLine($"{BattleLogMSG} {round}");
+                    Console.WriteLine("==================================================");
 
-                    ACharacter target = null;
-                    string action = "Attack";
-                    int hpBefore = 0;
+                    TxtManager.Append(path, "==================================================");
+                    TxtManager.Append(path, $"  BATTLE LOG - Round {round}");
+                    TxtManager.Append(path, "==================================================");
 
-                    if (fighter.abilities.Count > 0)
+                    fighters.Sort((a, b) => b.Speed.CompareTo(a.Speed));
+
+                    foreach (var fighter in fighters)
                     {
-                        Ability ability = fighter.abilities[rand.Next(fighter.abilities.Count)];
-                        action = ability.Name;
+                        if (!fighter.IsAlive)
+                            continue;
 
-                        if (ability.Type == AbilityType.Attack)
-                            target = EnemyTarget(fighters, fighter);
-                        else
-                            target = AllyTarget(fighters, fighter);
+                        ACharacter target = null;
+                        string action = "Attack";
+                        int hpBefore = 0;
 
-                        if (target != null)
+                        if (fighter.abilities.Count > 0)
                         {
-                            hpBefore = target.CurrentHealth;
-
-                            fighter.CastAbilityEngine(ability, target);
+                            Ability ability = fighter.abilities[rand.Next(fighter.abilities.Count)];
+                            action = ability.Name;
 
                             if (ability.Type == AbilityType.Attack)
+                                target = EnemyTarget(fighters, fighter);
+                            else
+                                target = AllyTarget(fighters, fighter);
+
+                            if (target != null)
                             {
-                                int dmg = ability.Power + (fighter.attackBuffCount * 2);
+                                hpBefore = target.CurrentHealth;
+
+                                fighter.CastAbilityEngine(ability, target);
+
+                                if (ability.Type == AbilityType.Attack)
+                                {
+                                    int dmg = ability.Power + (fighter.attackBuffCount * 2);
+
+                                    fighter.TotalDamage += dmg;
+                                    combatHelper.TotalDamage(dmg);
+
+                                    if (!target.IsAlive)
+                                        defeatedCharacters.Add(target);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            target = EnemyTarget(fighters, fighter);
+
+                            if (target != null)
+                            {
+                                hpBefore = target.CurrentHealth;
+
+                                int dmg = fighter.AttackEngine(baseDamage);
 
                                 fighter.TotalDamage += dmg;
                                 combatHelper.TotalDamage(dmg);
+
+                                target.TakeDamageEngine(dmg);
 
                                 if (!target.IsAlive)
                                     defeatedCharacters.Add(target);
                             }
                         }
-                    }
-                    else
-                    {
-                        target = EnemyTarget(fighters, fighter);
 
                         if (target != null)
                         {
-                            hpBefore = target.CurrentHealth;
+                            int damageDone = hpBefore - target.CurrentHealth;
+                            string defeated = target.IsAlive ? "" : " | DEFEATED!";
 
-                            int dmg = fighter.AttackEngine(baseDamage);
+                            string log = $"  {fighter.CharType} {fighter.Name} > {action} > {target.Name} -> {damageDone} dmg{defeated}";
 
-                            fighter.TotalDamage += dmg;
-                            combatHelper.TotalDamage(dmg);
-
-                            target.TakeDamageEngine(dmg);
-
-                            if (!target.IsAlive)
-                                defeatedCharacters.Add(target);
+                            Console.WriteLine(log);
+                            TxtManager.Append(path, log);
                         }
                     }
 
-                    if (target != null)
-                    {
-                        int damageDone = hpBefore - target.CurrentHealth;
-                        string defeated = target.IsAlive ? "" : " | DEFEATED!";
+                    int heroesAlive = fighters.Count(f => f.CharType == "HERO" && f.IsAlive);
+                    int enemiesAlive = fighters.Count(f => f.CharType == "ENEMY" && f.IsAlive);
 
-                        string log = $"  {fighter.CharType} {fighter.Name} > {action} > {target.Name} -> {damageDone} dmg{defeated}";
+                    Console.WriteLine("--------------------------------------------------");
+                    Console.WriteLine($"  Remaining enemies: {enemiesAlive} | Heroes standing: {heroesAlive}");
+                    Console.WriteLine("==================================================");
 
-                        Console.WriteLine(log);
-                        TxtManager.Append(path, log);
-                    }
+                    TxtManager.Append(path, "--------------------------------------------------");
+                    TxtManager.Append(path, $"  Remaining enemies: {enemiesAlive} | Heroes standing: {heroesAlive}");
+                    TxtManager.Append(path, "==================================================");
+
+                    round++;
                 }
 
-                int heroesAlive = fighters.Count(f => f.CharType == "HERO" && f.IsAlive);
-                int enemiesAlive = fighters.Count(f => f.CharType == "ENEMY" && f.IsAlive);
-
-                Console.WriteLine("--------------------------------------------------");
-                Console.WriteLine($"  Remaining enemies: {enemiesAlive} | Heroes standing: {heroesAlive}");
-                Console.WriteLine("==================================================");
-
-                TxtManager.Append(path, "--------------------------------------------------");
-                TxtManager.Append(path, $"  Remaining enemies: {enemiesAlive} | Heroes standing: {heroesAlive}");
-                TxtManager.Append(path, "==================================================");
-
-                round++;
+                Console.WriteLine("Combat finished!");
+                Console.WriteLine($"The total damage that was dealed in all the combat is: {combatHelper.Damage}");
+                Console.WriteLine($"The most profitable hero is: {combatHelper.MostProfitableHero(fighters)}");
+                Console.WriteLine($"The enemy that survived least rounds is: {combatHelper.EnemyDefeatedFirst(defeatedCharacters)}");
             }
-
-            Console.WriteLine("Combat finished!");
-            Console.WriteLine($"The total damage that was dealed in all the combat is: {combatHelper.Damage}");
-            Console.WriteLine($"The most profitable hero is: {combatHelper.MostProfitableHero(fighters)}");
-            Console.WriteLine($"The enemy that survived least rounds is: {combatHelper.EnemyDefeatedFirst(defeatedCharacters)}");
+            else
+            {
+                Console.WriteLine(NoFightersMSG);
+            }
         }
 
         private ACharacter EnemyTarget(List<ACharacter> fighters, ACharacter attacker)
