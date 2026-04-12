@@ -10,11 +10,16 @@ namespace HeroEngine.Core.UI
     public class CombatSystem
     {
         const string BattleLogMSG = "  BATTLE LOG - Round ";
+        const int baseDamage = 10;
+
         int round = 1;
         Random rand = new Random();
-        string path = "../../../Core/File/combat_log.txt"; //This route make the file create in the File folder of the project
+
+        string path = "../../../Core/File/combat_log.txt";
+
         CombatHelper combatHelper = new CombatHelper();
-        List<ACharacter> defeatedCharacters = new List<ACharacter>(); //I make this list to be abre to control the defeated characters for the enemydefeatedfirst method easier
+        List<ACharacter> defeatedCharacters = new List<ACharacter>();
+
         public void Combat(List<ACharacter> fighters)
         {
             Directory.CreateDirectory("Files");
@@ -34,53 +39,63 @@ namespace HeroEngine.Core.UI
 
                 foreach (var fighter in fighters)
                 {
-                    if (fighter.IsAlive)
-                    {
-                        ACharacter target = null;
-                        string action = "Attack";
-                        int hpBefore = 0;
+                    if (!fighter.IsAlive)
+                        continue;
 
-                        if (fighter.abilities.Count > 0)
+                    ACharacter target = null;
+                    string action = "Attack";
+                    int hpBefore = 0;
+
+                    if (fighter.abilities.Count > 0)
+                    {
+                        Ability ability = fighter.abilities[rand.Next(fighter.abilities.Count)];
+                        action = ability.Name;
+
+                        if (ability.Type == AbilityType.Attack)
+                            target = EnemyTarget(fighters, fighter);
+                        else
+                            target = AllyTarget(fighters, fighter);
+
+                        if (target != null)
                         {
-                            Ability ability = fighter.abilities[rand.Next(fighter.abilities.Count)];
-                            action = ability.Name;
+                            hpBefore = target.CurrentHealth;
+
+                            fighter.CastAbilityEngine(ability, target);
 
                             if (ability.Type == AbilityType.Attack)
                             {
-                                target = EnemyTarget(fighters, fighter);
-                                hpBefore = target.CurrentHealth;
+                                int dmg = ability.Power + (fighter.attackBuffCount * 2);
 
-                                int dmg = fighter.AttackEngine(ability.Power);
                                 fighter.TotalDamage += dmg;
-                                target.TakeDamageEngine(dmg);
                                 combatHelper.TotalDamage(dmg);
-                            }
-                            else
-                            {
-                                target = AllyTarget(fighters, fighter);
-                                hpBefore = target.CurrentHealth;
 
-                                if (ability.Type == AbilityType.Healing)
-                                    target.CurrentHealth += ability.Power;
-
-                                if (ability.Type == AbilityType.Defense)
-                                    target.defenseBuffCount++;
-
-                                if (ability.Type == AbilityType.Support)
-                                    target.attackBuffCount++;
+                                if (!target.IsAlive)
+                                    defeatedCharacters.Add(target);
                             }
                         }
-                        else
+                    }
+                    else
+                    {
+                        target = EnemyTarget(fighters, fighter);
+
+                        if (target != null)
                         {
-                            target = EnemyTarget(fighters, fighter);
                             hpBefore = target.CurrentHealth;
 
-                            int dmg = fighter.AttackEngine(10);
+                            int dmg = fighter.AttackEngine(baseDamage);
+
+                            fighter.TotalDamage += dmg;
+                            combatHelper.TotalDamage(dmg);
+
                             target.TakeDamageEngine(dmg);
-                            if (target.CurrentHealth <= 0)
+
+                            if (!target.IsAlive)
                                 defeatedCharacters.Add(target);
                         }
+                    }
 
+                    if (target != null)
+                    {
                         int damageDone = hpBefore - target.CurrentHealth;
                         string defeated = target.IsAlive ? "" : " | DEFEATED!";
 
@@ -108,17 +123,17 @@ namespace HeroEngine.Core.UI
             Console.WriteLine("Combat finished!");
             Console.WriteLine($"The total damage that was dealed in all the combat is: {combatHelper.Damage}");
             Console.WriteLine($"The most profitable hero is: {combatHelper.MostProfitableHero(fighters)}");
-            Console.WriteLine($"The enemy that survived least rounds is: {combatHelper.EnemyDefeatedFirst(fighters)}");
+            Console.WriteLine($"The enemy that survived least rounds is: {combatHelper.EnemyDefeatedFirst(defeatedCharacters)}");
         }
 
         private ACharacter EnemyTarget(List<ACharacter> fighters, ACharacter attacker)
         {
             List<ACharacter> targets = fighters
-                .Where(f => f.IsAlive && f.CharType != attacker.CharType)
+                .Where(f => f.IsAlive && f.CharType != attacker.CharType && f != attacker)
                 .ToList();
 
             if (targets.Count == 0)
-                return attacker;
+                return null;
 
             return targets[rand.Next(targets.Count)];
         }
@@ -126,11 +141,11 @@ namespace HeroEngine.Core.UI
         private ACharacter AllyTarget(List<ACharacter> fighters, ACharacter attacker)
         {
             List<ACharacter> targets = fighters
-                .Where(f => f.IsAlive && f.CharType == attacker.CharType)
+                .Where(f => f.IsAlive && f.CharType == attacker.CharType && f != attacker)
                 .ToList();
 
             if (targets.Count == 0)
-                return attacker;
+                return null;
 
             return targets[rand.Next(targets.Count)];
         }

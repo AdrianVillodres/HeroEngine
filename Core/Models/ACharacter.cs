@@ -201,6 +201,7 @@ namespace HeroEngine.Core.Models
                 Console.WriteLine($"{Name} does not have this ability");
             }
         }
+
         /// <summary>
         /// This method adds an ability to the hero in case the ability is not already added and sorts the abilities ordering them for the rarity
         /// </summary>
