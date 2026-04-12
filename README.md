@@ -46,8 +46,8 @@
 | 3            | -          | Dalia  | 3     | 150   | 0                | -      | 0          | -                |
 | 4            | -          | Abalon | 3     | 150   | 150              | 0      | 0          | No damage applied |
 
-
-##Chapter 2
+---
+## Chapter 2
 
 ## Test case 1: name = Swartz of the Ice Queen, rarity = Legendary, Type = Attack
 
@@ -58,7 +58,7 @@
 | 1            | -          | Swartz of the Ice Queen | Legendary  | Attack | (int)Rarity    | (int)Rarity    |           |
 | 2            | -          | Swartz of the Ice Queen | Legendary  | Attack | (int)Rarity    | (int)Rarity    | dalia.Add(swartz) |
 | 3            | -          | Swartz of the Ice Queen | Legendary  | Attack | (int)Rarity    | (int)Rarity    | dalia.listAllAbilities() |
-|              |            | Swartz of the Ice Queen | Legendary  | Attack | (int)Rarity    | (int)Rarity    | Output: [Legendary]   Swartz of the Ice Queen     Type: Attack       Cost: 40 mana |
+| 4           |            | Swartz of the Ice Queen | Legendary  | Attack | (int)Rarity    | (int)Rarity    | Output: [Legendary]   Swartz of the Ice Queen     Type: Attack       Cost: 40 mana |
 
 ---
 
@@ -71,7 +71,7 @@
 | 1            | -          | Rock throw | Common | Attack | (int)Rarity | (int)Rarity |           |
 | 2            | -          | Rock throw | Common | Attack | (int)Rarity | (int)Rarity | dalia.Add(throw) |
 | 3            | -          | Rock throw | Common | Attack | (int)Rarity | (int)Rarity | dalia.listAllAbilities() |
-|              |            | Rock throw | Common | Attack | (int)Rarity | (int)Rarity | Output: [Common]   Rock throw    Type: Attack       Cost: 5 mana |
+| 4            |            | Rock throw | Common | Attack | (int)Rarity | (int)Rarity | Output: [Common]   Rock throw    Type: Attack       Cost: 5 mana |
 
 ---
 
