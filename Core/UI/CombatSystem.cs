@@ -29,8 +29,8 @@ namespace HeroEngine.Core.UI
 
                 Directory.CreateDirectory("Files");
 
-                while (fighters.Any(f => f.IsAlive && f.CharType == "HERO") &&
-                       fighters.Any(f => f.IsAlive && f.CharType == "ENEMY"))
+                while (fighters.Any(f => f.IsAlive && f.CharType == CharType.HERO) &&
+                       fighters.Any(f => f.IsAlive && f.CharType == CharType.ENEMY))
                 {
                     Console.WriteLine("==================================================");
                     Console.WriteLine($"{BattleLogMSG} {round}");
@@ -111,8 +111,8 @@ namespace HeroEngine.Core.UI
                         }
                     }
 
-                    int heroesAlive = fighters.Count(f => f.CharType == "HERO" && f.IsAlive);
-                    int enemiesAlive = fighters.Count(f => f.CharType == "ENEMY" && f.IsAlive);
+                    int heroesAlive = fighters.Count(f => f.CharType == CharType.HERO && f.IsAlive);
+                    int enemiesAlive = fighters.Count(f => f.CharType == CharType.ENEMY && f.IsAlive);
 
                     Console.WriteLine("--------------------------------------------------");
                     Console.WriteLine($"  Remaining enemies: {enemiesAlive} | Heroes standing: {heroesAlive}");

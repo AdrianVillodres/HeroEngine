@@ -19,7 +19,7 @@ namespace HeroEngine.Core.Models
             MaxHP = (int)(baseHealth * (1 + 0.25 * (level - 1)));
             CurrentHealth = MaxHP;
             Speed = 100 * Level;
-            CharType = "HERO";
+            CharType = CharType.HERO;
         }
 
         /// <summary>

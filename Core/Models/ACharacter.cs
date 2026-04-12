@@ -22,7 +22,7 @@ namespace HeroEngine.Core.Models
 
         public int Speed { get; protected set; }
 
-        public string CharType { get; set; }
+        public CharType CharType { get; set; }
 
         public List<Ability> abilities = new List<Ability>();
 

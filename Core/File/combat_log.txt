@@ -1051,3 +1051,127 @@
 --------------------------------------------------
   Remaining enemies: 0 | Heroes standing: 3
 ==================================================
+==================================================
+  BATTLE LOG - Round 1
+==================================================
+  HERO Abalon > Hellfire of demise > Minion Loki -> 50 dmg
+  HERO Dalia > Healing hands > Mercer Frey -> -30 dmg
+  HERO Mercer Frey > Air cutter > Minion Loki -> 10 dmg
+  ENEMY Minion Loki > Corrupt memory > Dalia -> 30 dmg
+  ENEMY Elite Shadow > Corrupt memory > Abalon -> 24 dmg
+  ENEMY Boss Altair > Corrupt memory > Dalia -> 30 dmg
+--------------------------------------------------
+  Remaining enemies: 3 | Heroes standing: 3
+==================================================
+==================================================
+  BATTLE LOG - Round 2
+==================================================
+  HERO Abalon > Hellfire of demise > Boss Altair -> 50 dmg
+  HERO Dalia > buff > Mercer Frey -> 0 dmg
+  HERO Mercer Frey > Air cutter > Minion Loki -> 10 dmg
+  ENEMY Minion Loki > Corrupt memory > Dalia -> 30 dmg
+  ENEMY Elite Shadow > Corrupt memory > Abalon -> 24 dmg
+  ENEMY Boss Altair > Corrupt memory > Mercer Frey -> 30 dmg
+--------------------------------------------------
+  Remaining enemies: 3 | Heroes standing: 3
+==================================================
+==================================================
+  BATTLE LOG - Round 3
+==================================================
+  HERO Abalon > Hellfire of demise > Minion Loki -> 30 dmg | DEFEATED!
+  HERO Dalia > Healing hands > Abalon -> -30 dmg
+  HERO Mercer Frey > Air cutter > Elite Shadow -> 10 dmg
+  ENEMY Elite Shadow > Corrupt memory > Dalia -> 4 dmg | DEFEATED!
+  ENEMY Boss Altair > Corrupt memory > Abalon -> 24 dmg
+--------------------------------------------------
+  Remaining enemies: 2 | Heroes standing: 2
+==================================================
+==================================================
+  BATTLE LOG - Round 4
+==================================================
+  HERO Abalon > Hellfire of demise > Boss Altair -> 50 dmg | DEFEATED!
+  HERO Mercer Frey > Air cutter > Elite Shadow -> 10 dmg
+  ENEMY Elite Shadow > Corrupt memory > Abalon -> 7 dmg | DEFEATED!
+--------------------------------------------------
+  Remaining enemies: 1 | Heroes standing: 1
+==================================================
+==================================================
+  BATTLE LOG - Round 5
+==================================================
+  HERO Mercer Frey > Air cutter > Elite Shadow -> 10 dmg
+  ENEMY Elite Shadow > Corrupt memory > Mercer Frey -> 30 dmg
+--------------------------------------------------
+  Remaining enemies: 1 | Heroes standing: 1
+==================================================
+==================================================
+  BATTLE LOG - Round 6
+==================================================
+  HERO Mercer Frey > Air cutter > Elite Shadow -> 10 dmg
+  ENEMY Elite Shadow > Corrupt memory > Mercer Frey -> 30 dmg
+--------------------------------------------------
+  Remaining enemies: 1 | Heroes standing: 1
+==================================================
+==================================================
+  BATTLE LOG - Round 7
+==================================================
+  HERO Mercer Frey > Air cutter > Elite Shadow -> 10 dmg
+  ENEMY Elite Shadow > Corrupt memory > Mercer Frey -> 30 dmg
+--------------------------------------------------
+  Remaining enemies: 1 | Heroes standing: 1
+==================================================
+==================================================
+  BATTLE LOG - Round 8
+==================================================
+  HERO Mercer Frey > Air cutter > Elite Shadow -> 10 dmg
+  ENEMY Elite Shadow > Corrupt memory > Mercer Frey -> 30 dmg
+--------------------------------------------------
+  Remaining enemies: 1 | Heroes standing: 1
+==================================================
+==================================================
+  BATTLE LOG - Round 9
+==================================================
+  HERO Mercer Frey > Air cutter > Elite Shadow -> 10 dmg
+  ENEMY Elite Shadow > Corrupt memory > Mercer Frey -> 5 dmg | DEFEATED!
+--------------------------------------------------
+  Remaining enemies: 1 | Heroes standing: 0
+==================================================
+==================================================
+  BATTLE LOG - Round 1
+==================================================
+  HERO Abalon > Hellfire of demise > Minion Loki -> 50 dmg
+  HERO Dalia > Healing hands > Abalon -> -30 dmg
+  HERO Mercer Frey > Air cutter > Minion Loki -> 10 dmg
+  ENEMY Minion Loki > Corrupt memory > Dalia -> 30 dmg
+  ENEMY Elite Shadow > Corrupt memory > Abalon -> 24 dmg
+  ENEMY Boss Altair > Corrupt memory > Abalon -> 24 dmg
+--------------------------------------------------
+  Remaining enemies: 3 | Heroes standing: 3
+==================================================
+==================================================
+  BATTLE LOG - Round 2
+==================================================
+  HERO Abalon > Hellfire of demise > Elite Shadow -> 50 dmg
+  HERO Dalia > Swartz of the Ice Queen > Boss Altair -> 80 dmg
+  HERO Mercer Frey > Air cutter > Boss Altair -> 10 dmg
+  ENEMY Minion Loki > Corrupt memory > Dalia -> 30 dmg
+  ENEMY Elite Shadow > Corrupt memory > Dalia -> 30 dmg
+  ENEMY Boss Altair > Corrupt memory > Dalia -> 4 dmg | DEFEATED!
+--------------------------------------------------
+  Remaining enemies: 3 | Heroes standing: 2
+==================================================
+==================================================
+  BATTLE LOG - Round 3
+==================================================
+  HERO Abalon > Hellfire of demise > Minion Loki -> 40 dmg | DEFEATED!
+  HERO Mercer Frey > Air cutter > Boss Altair -> 10 dmg | DEFEATED!
+  ENEMY Elite Shadow > Corrupt memory > Mercer Frey -> 30 dmg
+--------------------------------------------------
+  Remaining enemies: 1 | Heroes standing: 2
+==================================================
+==================================================
+  BATTLE LOG - Round 4
+==================================================
+  HERO Abalon > Hellfire of demise > Elite Shadow -> 50 dmg | DEFEATED!
+--------------------------------------------------
+  Remaining enemies: 0 | Heroes standing: 2
+==================================================
