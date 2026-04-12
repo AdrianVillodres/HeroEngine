@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using HeroEngine.Core.Enums;
 
 namespace HeroEngine.Core.Models
 {
@@ -30,7 +31,7 @@ namespace HeroEngine.Core.Models
             fighters.GroupBy(f => f.TotalDamage);
             while(name == "")
             {
-                if (fighters[index].CharType.Contains("ENEMY"))
+                if (fighters[index].CharType.Equals(CharType.ENEMY))
                     index++;
                 else
                     name = fighters[index].Name;
@@ -45,7 +46,7 @@ namespace HeroEngine.Core.Models
         /// <returns>the name of the enemy that was killed in less rounds</returns>
         public string EnemyDefeatedFirst(List<ACharacter> defeatedCharacters)
         {
-            ACharacter enemy = defeatedCharacters.FirstOrDefault(f => f.CharType == "ENEMY");
+            ACharacter enemy = defeatedCharacters.FirstOrDefault(f => f.CharType == CharType.ENEMY);
 
             if (enemy == null)
                 return "No enemies defeated";
