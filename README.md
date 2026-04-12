@@ -13,7 +13,7 @@
 | 3            | -          | Dalia  | 3     | 150   | 150           | 13     | 13         | -                  |
 | 4            | -          | Dalia  | 3     | 150   | 150           | 13     | 13         | -                  |
 | 5            | -          | Abalon | 3     | 150   | 137           | 13     | 13         | -                  |
-| 6            | -          | Abalon | 3     | 150   | 137           | -      | -          | Output: "Abalon receives 13 | HP: 137/150" |
+| 6            | -          | Abalon | 3     | 150   | 137           | -      | -          | Output: "Abalon receives 13 HP: 137/150" |
 
 ---
 
