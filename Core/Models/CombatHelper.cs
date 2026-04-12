@@ -45,17 +45,12 @@ namespace HeroEngine.Core.Models
         /// <returns>the name of the enemy that was killed in less rounds</returns>
         public string EnemyDefeatedFirst(List<ACharacter> defeatedCharacters)
         {
-            string name = "";
-            int index = 0;
-            defeatedCharacters.GroupBy(f => f.TotalDamage);
-            while (name == "")
-            {
-                if (defeatedCharacters[index].CharType.Contains("HERO"))
-                    index++;
-                else
-                    name = defeatedCharacters[index].Name;
-            }
-            return name;
+            ACharacter enemy = defeatedCharacters.FirstOrDefault(f => f.CharType == "ENEMY");
+
+            if (enemy == null)
+                return "No enemies defeated";
+
+            return enemy.Name;
         }
     }
 }
