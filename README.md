@@ -29,7 +29,7 @@
 | 2            | -          | Dalia  | 1     | 50    | 50            | 0      | 0          | -                  |
 | 3            | -          | Dalia  | 1     | 50    | 50            | -      | 20         | -                  |
 | 4            | -          | Abalon | 1     | 50    | 30            | 0      | 0          | -                  |
-| 5            | -          | Abalon | 1     | 50    | 30            | -      | -          | Output: "Abalon receives 0 | HP: 50/50" |
+| 5            | -          | Abalon | 1     | 50    | 30            | -      | -          | Output: "Abalon receives 0 HP: 50/50" |
 
 ---
 
