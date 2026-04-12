@@ -35,7 +35,7 @@ namespace HeroEngine.Core.UI
             Ability buff = new Ability("buff", Enums.Rarity.Rare, Enums.AbilityType.Support);
             Console.WriteLine(swartz);
 
-            //I make this much add to the abilities to be able to test all the posibilities
+            //I make this many add to the abilities to be able to test all the posibilities
             dalia.AddAbility(swartz);
             dalia.AddAbility(heal);
             abalon.AddAbility(hellfire);
