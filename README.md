@@ -1,4 +1,4 @@
-UML diagram: https://drive.google.com/file/d/1nX7f7bF2IlZ7h34crU18ZdwcBDO_DRba/view?usp=sharing
+**UML diagram:** [Diagram](https://drive.google.com/file/d/1nX7f7bF2IlZ7h34crU18ZdwcBDO_DRba/view?usp=sharing)
 
 ## Chapter 1
 
